@@ -5,11 +5,11 @@ import os, time, sys
 import shutil
 import glob
 
-# path_input = os.path.dirname(os.path.realpath(__file__))        # path_input = 'C:\\Footways_and_cycleways\\'
+path_input = os.path.dirname(os.path.realpath(__file__))        # path_input = 'C:\\Footways_and_cycleways\\'
 
 # path_output = os.path.join(path_input, "excel")                 # path_output = 'C:\\Footways_and_cycleways\\Excel\\'
 
-def dbf_to_excel(path):
+def dbf_to_excel(path=path_input):
     path_input = path
     path_output = os.path.join(path_input, "excel") 
     # delete output path
@@ -73,6 +73,8 @@ def dbf_to_excel(path):
     combined = pd.concat(dfs, ignore_index=True)
     combined.to_excel(writer, sheet_name='csv_combined', index=False)
     writer.save()
+    csv_path = os.path.join(path_output, 'CSV_combined.csv')
+    combined.to_csv(csv_path, index=False)
 
 
 if __name__ == "__main__":
